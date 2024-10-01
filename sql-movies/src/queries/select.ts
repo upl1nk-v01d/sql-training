@@ -1,21 +1,21 @@
 export const selectActorByName = (fullName: string): string => {
-  throw new Error(`todo`);
+  return `SELECT full_name FROM actors WHERE full_name LIKE '${fullName}'`
 };
 
 export const selectKeyword = (keyword: string): string => {
-  throw new Error(`todo`);
+  return `SELECT keyword FROM keywords WHERE keyword LIKE '${keyword}'`
 };
 
 export const selectDirector = (director: string): string => {
-  throw new Error(`todo`);
+  return `SELECT full_name FROM directors WHERE full_name LIKE '${director}'`
 };
 
 export const selectGenre = (genre: string): string => {
-  throw new Error(`todo`);
+  return `SELECT genre FROM genres WHERE genre LIKE '${genre}'`
 };
 
 export const selectProductionCompany = (company: string): string => {
-  throw new Error(`todo`);
+  return `SELECT company_name FROM production_companies WHERE company_name LIKE '${company}'`
 };
 
 export const selectMovieById = (id: number): string => {
@@ -78,5 +78,5 @@ export const selectProductionCompaniesByMovieId = (movieId: number): string => {
  * select count as c, because an object is returned and expected property name is c
  */
 export const selectCount = (table: string): string => {
-  throw new Error(`todo`);
+  return `SELECT COUNT(*) AS c FROM ${table}`;
 };
