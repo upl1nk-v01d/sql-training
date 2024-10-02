@@ -43,7 +43,7 @@ export const selectProductionCompanyById = (id: number): string => {
 };
 
 export const selectMovie = (imdbId: string): string => {
-  throw new Error(`todo`);
+  return `SELECT imdb_id, original_title FROM movies WHERE imdb_id LIKE '${imdbId}'`
 };
 
 export const selectMovieId = (imdbId: string): string => {

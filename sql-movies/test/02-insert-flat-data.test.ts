@@ -22,7 +22,6 @@ import { Movie } from "../src/data/types";
 import { escape } from "../src/utils";
 import { minutes } from "./utils";
 
-/*
 const insertActors = (actors: string[]) => {
   return (
     `INSERT INTO ${ACTORS} (full_name) VALUES` +
@@ -56,7 +55,7 @@ const insertProductionCompanies = (companies: string[]) => {
     `INSERT INTO ${PRODUCTION_COMPANIES} (company_name) VALUES` +
     companies.map(company => `('${escape(company)}')`).join(",")
   )};
-*/
+
 const insertMovies = (movies: Movie[]) => {
   return (
     `INSERT INTO ${MOVIES} (
@@ -75,21 +74,21 @@ const insertMovies = (movies: Movie[]) => {
     VALUES` +
     movies.map(movie => `
       (
-        '${escape(movie.imdbId)}', 
-        '${escape(movie.popularity.toFixed(2))}'
-        '${escape(movie.budget.toFixed(2))}'
-        '${escape(movie.budgetAdjusted.toFixed(2))}'
-        '${escape(movie.revenue.toFixed(2))}'
-        '${escape(movie.revenueAdjusted.toFixed(2))}'
-        '${escape(movie.originalTitle)}'
-        '${escape(movie.homepage)}'
-        '${escape(movie.overview)}'
-        '${escape(movie.runtime.toFixed(2))}'
+        '${escape(movie.imdbId)}',
+        '${escape(movie.popularity.toFixed(6))}',
+        '${escape(movie.budget.toFixed())}',
+        '${escape(movie.budgetAdjusted.toFixed())}',
+        '${escape(movie.revenue.toFixed())}',
+        '${escape(movie.revenueAdjusted.toFixed())}',
+        '${escape(movie.originalTitle)}',
+        '${escape(movie.homepage)}',
+        '${escape(movie.tagline = movie.tagline || "")}',
+        '${escape(movie.overview)}',
+        '${escape(movie.runtime.toFixed())}',
         '${escape(movie.releaseDate)}'
       )
     `).join(",")
   )};
-
 
 describe("Insert Flat Data", () => {
   let db: Database;
@@ -98,7 +97,7 @@ describe("Insert Flat Data", () => {
     db = await Database.fromExisting("01", "02");
     await CsvLoader.load();
   }, minutes(1));
-/*
+  
   it(
     "should insert actors",
     async done => {
@@ -183,7 +182,7 @@ describe("Insert Flat Data", () => {
     },
     minutes(1)
   );
-
+  
   it(
     "should insert production companies",
     async done => {
@@ -207,7 +206,7 @@ describe("Insert Flat Data", () => {
     },
     minutes(1)
   );
-*/
+  
   it(
     "should insert movies",
     async done => {
@@ -217,14 +216,14 @@ describe("Insert Flat Data", () => {
       for (const ch of chunks) {
         await db.insert(insertMovies(ch));
       }
-
+      
       const count = await db.selectSingleRow(selectCount(MOVIES));
       expect(count.c).toBe(2998);
-
+      
       const row = await db.selectSingleRow(selectMovie("tt0369610"));
       expect(row.id).not.toBeNaN();
       expect(row.original_title).toEqual("Jurassic World");
-
+      
       done();
     },
     minutes(1)
