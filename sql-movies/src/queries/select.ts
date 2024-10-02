@@ -47,11 +47,11 @@ export const selectMovie = (imdbId: string): string => {
 };
 
 export const selectMovieId = (imdbId: string): string => {
-  throw new Error(`todo`);
+  return `SELECT imdb_id FROM movies WHERE imdb_id LIKE '${imdbId}'`
 };
 
 export const selectRatingsByUserID = (userId: number): string => {
-  throw new Error(`todo`);
+  return `SELECT user_id, rating, time_created FROM movie_ratings WHERE user_id LIKE '${userId}'`
 };
 
 export const selectGenresByMovieId = (movieId: number): string => {
