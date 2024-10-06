@@ -15,8 +15,8 @@ const insertRatings = (movieId: number, ratings: Rating[]) => {
     `INSERT INTO ${MOVIE_RATINGS} 
     (user_id, movie_id, rating, time_created) 
     VALUES ` + 
-    ratings.map(movie => 
-      `('${movie.userId}', '${movie.imdbId}', '${movie.rating}', '${movie.time_created}')`).join(",")
+    ratings.map(rating => 
+      `('${rating.userId}', '${movieId}', '${rating.rating}', '${rating.time_created}')`).join(",")
   );
 };
 
@@ -53,6 +53,6 @@ describe("Insert Combined Data", () => {
 
       done();
     },
-    minutes(10)
+    minutes(3)
   );
 });
