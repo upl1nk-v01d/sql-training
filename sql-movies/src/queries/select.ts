@@ -47,11 +47,11 @@ export const selectMovie = (imdbId: string): string => {
 };
 
 export const selectMovieId = (imdbId: string): string => {
-  return `SELECT imdb_id FROM movies WHERE imdb_id LIKE '${imdbId}'`
+  return `SELECT id FROM movies WHERE imdb_id = '${imdbId}'`
 };
 
 export const selectRatingsByUserID = (userId: number): string => {
-  return `SELECT user_id, rating, time_created FROM movie_ratings WHERE user_id LIKE '${userId}'`
+  return `SELECT * FROM movie_ratings WHERE user_id LIKE '${userId}'`
 };
 
 export const selectGenresByMovieId = (movieId: number): string => {
