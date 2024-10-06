@@ -19,27 +19,27 @@ export const selectProductionCompany = (company: string): string => {
 };
 
 export const selectMovieById = (id: number): string => {
-  throw new Error(`todo`);
+  return `SELECT movie_id FROM movies WHERE imdb_id LIKE '${id}'`;
 };
 
 export const selectGenreById = (id: number): string => {
-  throw new Error(`todo`);
+  return `SELECT genre_id FROM movie_genres WHERE genre_id LIKE '${id}'`;
 };
 
 export const selectDirectorById = (id: number): string => {
-  throw new Error(`todo`);
+  return `SELECT director_id FROM movie_directors WHERE director_id LIKE '${id}'`;
 };
 
 export const selectActorById = (id: number): string => {
-  throw new Error(`todo`);
+  return `SELECT actor_id FROM movie_actors WHERE actor_id LIKE '${id}'`;
 };
 
 export const selectKeywordById = (id: number): string => {
-  throw new Error(`todo`);
+  return `SELECT keyword_id FROM movie_keywords WHERE keyword_id LIKE '${id}'`;
 };
 
 export const selectProductionCompanyById = (id: number): string => {
-  throw new Error(`todo`);
+  return `SELECT production_id FROM movie_production_companies WHERE production_id LIKE '${id}'`;
 };
 
 export const selectMovie = (imdbId: string): string => {
