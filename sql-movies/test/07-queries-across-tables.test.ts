@@ -14,10 +14,11 @@ describe("Queries Across Tables", () => {
     async done => {
       const query = `
         SELECT 
-          full_name AS director,   
-          budget AS total_budget
+          ${DIRECTORS}.full_name AS director,   
+          ${MOVIES}.budget AS total_budget
         FROM ${MOVIES}, ${DIRECTORS}, ${MOVIE_DIRECTORS}
-        INNER JOIN ${MOVIE_DIRECTORS} ON ${MOVIES}.imdb_id = ${MOVIE_DIRECTORS}.movie_id
+        INNER JOIN ${MOVIES} ON ${MOVIES}.id = ${MOVIE_DIRECTORS}.movie_id
+        INNER JOIN ${DIRECTORS} ON ${MOVIES}.id = ${MOVIE_DIRECTORS}.movie_id
         ORDER BY total_budget
         DESC
         LIMIT 3
@@ -53,8 +54,10 @@ describe("Queries Across Tables", () => {
           tagline as keyword,
           COUNT (keyword) AS count        
         FROM ${MOVIES}, ${KEYWORDS}, ${MOVIE_KEYWORDS}
-        INNER JOIN ${MOVIE_KEYWORDS} ON ${MOVIES}.imdb_id = ${MOVIE_KEYWORDS}.movie_id
+        INNER JOIN ${MOVIES} ON ${MOVIES}.id = ${MOVIE_KEYWORDS}.movie_id
+        INNER JOIN ${KEYWORDS} ON ${MOVIES}.id = ${MOVIE_KEYWORDS}.movie_id
         ORDER BY count
+        GROUP BY keyword
         DESC
         LIMIT 10
       `;
@@ -114,11 +117,11 @@ describe("Queries Across Tables", () => {
     async done => {
       const query = `
         SELECT 
-          original_title,
           COUNT (actors) AS count        
         FROM ${MOVIES}, ${ACTORS}, ${MOVIE_ACTORS}
         WHERE original_title LIKE 'Life'
-        INNER JOIN ${MOVIE_ACTORS} ON ${MOVIES}.imdb_id = ${MOVIE_ACTORS}.actor_id
+        INNER JOIN ${MOVIES} ON ${MOVIES}.id = ${MOVIE_ACTORS}.movie_id
+        INNER JOIN ${ACTORS} ON ${MOVIES}.id = ${MOVIE_ACTORS}.movie_id
       `;
 
       const result = await db.selectSingleRow(query);
@@ -138,12 +141,13 @@ describe("Queries Across Tables", () => {
     async done => {
       const query = `
         SELECT 
-          original_title,
-          COUNT (*) AS rating        
+          genre,
+          COUNT (*) AS five_stars_count        
         FROM ${MOVIES}, ${MOVIE_RATINGS}, ${MOVIE_GENRES}
-        WHERE rating >= 5
-        INNER JOIN ${MOVIE_GENRES} ON ${MOVIES}.imdb_id = ${MOVIE_GENRES}.genre_id
-        ORDER BY rating
+        WHERE five_stars_count >= 5
+        INNER JOIN ${MOVIES} ON ${MOVIES}.id = ${MOVIE_GENRES}.movie_id
+        INNER JOIN ${GENRES} ON ${MOVIES}.id = ${MOVIE_GENRES}.movie_id
+        ORDER BY five_stars_count
         DESC
         LIMIT 3
       `;
@@ -175,11 +179,12 @@ describe("Queries Across Tables", () => {
     async done => {
       const query = `
         SELECT 
-          original_title,
-          AVG (popularity) AS five_stars_count
+          genre,
+          AVG (popularity) AS avg_rating
         FROM ${MOVIES}, ${GENRES}, ${MOVIE_GENRES}
-        INNER JOIN ${MOVIE_GENRES} ON ${MOVIES}.imdb_id = ${MOVIE_GENRES}.genre_id
-        ORDER BY popularity
+        INNER JOIN ${MOVIES} ON ${MOVIES}.id = ${MOVIE_GENRES}.movie_id
+        INNER JOIN ${GENRES} ON ${MOVIES}.id = ${MOVIE_GENRES}.movie_id
+        ORDER BY avg_rating
         DESC
         LIMIT 3
       `;
