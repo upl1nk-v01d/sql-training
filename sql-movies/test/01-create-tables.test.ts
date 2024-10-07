@@ -37,7 +37,8 @@ const CREATE_MOVIE_RATINGS_TABLE = `CREATE TABLE ${MOVIE_RATINGS} (
   movie_id integer NOT NULL,
   rating real NOT NULL,
   time_created text NOT NULL,
-  CONSTRAINT PK_Rating PRIMARY KEY (user_id,movie_id)
+  PRIMARY KEY (user_id, movie_id),
+  FOREIGN KEY (movie_id) REFERENCES ${MOVIES}(id)
 )`;
 
 const CREATE_ACTORS_TABLE = `CREATE TABLE ${ACTORS} (

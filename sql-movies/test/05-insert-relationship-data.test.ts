@@ -40,7 +40,7 @@ const insertMovieGenres = (
   genreRows: GenreRow[]
 ): string => {
   const filteredGenres = genreRows.filter(row => genres.includes(row.genre));  
-  const mappedIds = filteredGenres.map(genre => `('${movieId}', '${genre.id}')`).join(",");
+  const mappedIds = filteredGenres.map(genre => `(${movieId}, ${genre.id})`).join(",");
   
   console.log("insertMovieGenres: " +movieId);
 
@@ -56,7 +56,7 @@ const insertMovieActors = (
   actorRows: ActorRow[]
 ): string => {
   const filteredGenres = actorRows.filter(row => actors.includes(row.full_name));  
-  const mappedIds = filteredGenres.map(actor => `('${movieId}', '${actor.id}')`).join(",");
+  const mappedIds = filteredGenres.map(actor => `(${movieId}, ${actor.id})`).join(",");
   
   console.log("insertMovieActors: " +movieId);
 
@@ -72,7 +72,7 @@ const insertMovieDirectors = (
   directorRows: DirectorRow[]
 ): string => {
   const filteredGenres = directorRows.filter(row => directors.includes(row.full_name));  
-  const mappedIds = filteredGenres.map(director => `('${movieId}', '${director.id}')`).join(",");
+  const mappedIds = filteredGenres.map(director => `(${movieId}, ${director.id})`).join(",");
   
   console.log("insertMovieDirectors: " +movieId);
 
@@ -88,7 +88,7 @@ const insertMovieKeywords = (
   keywordRows: KeywordRow[]
 ): string => {
   const filteredGenres = keywordRows.filter(row => keywords.includes(row.keyword));  
-  const mappedIds = filteredGenres.map(keyword => `('${movieId}', '${keyword.id}')`).join(",");
+  const mappedIds = filteredGenres.map(keyword => `(${movieId}, ${keyword.id})`).join(",");
   
   console.log("insertMovieKeywords: " +movieId);
 
@@ -104,7 +104,7 @@ const insertMovieProductionCompanies = (
   productionCompanyRows: ProductionCompanyRow[]
 ): string => {
   const filteredGenres = productionCompanyRows.filter(row => productionCompanies.includes(row.company_name));  
-  const mappedIds = filteredGenres.map(company => `('${movieId}', '${company.id}')`).join(",");
+  const mappedIds = filteredGenres.map(company => `(${movieId}, ${company.id})`).join(",");
   
   console.log("insertMovieProductionCompanies: " +movieId);
 
@@ -155,9 +155,9 @@ describe("Insert Relationship Data", () => {
       
       done();
     },
-    minutes(9)
+    minutes(3)
   );
-
+  
   it(
     "should insert actor relationship data",
     async done => {
@@ -193,7 +193,7 @@ describe("Insert Relationship Data", () => {
 
       done();
     },
-    minutes(9)
+    minutes(3)
   );
 
   it(
@@ -267,7 +267,7 @@ describe("Insert Relationship Data", () => {
 
       done();
     },
-    minutes(9)
+    minutes(3)
   );
 
   it(
@@ -314,7 +314,6 @@ describe("Insert Relationship Data", () => {
 
       done();
     },
-    minutes(9)
+    minutes(3)
   );
-
 });

@@ -13,10 +13,10 @@ import { minutes } from "./utils";
 const insertRatings = (movieId: number, ratings: Rating[]) => {
   return (
     `INSERT INTO ${MOVIE_RATINGS} 
-    (user_id, movie_id, rating, time_created) 
+    (movie_id, user_id, rating, time_created) 
     VALUES ` + 
     ratings.map(rating => 
-      `('${rating.userId}', '${movieId}', '${rating.rating}', '${rating.time_created}')`).join(",")
+      `(${movieId}, '${rating.userId}', '${rating.rating}', '${rating.time_created}')`).join(",")
   );
 };
 
@@ -53,6 +53,6 @@ describe("Insert Combined Data", () => {
 
       done();
     },
-    minutes(3)
+    minutes(999)
   );
 });

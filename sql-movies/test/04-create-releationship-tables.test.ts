@@ -4,7 +4,8 @@ import {
   MOVIE_KEYWORDS,
   MOVIE_ACTORS,
   MOVIE_DIRECTORS,
-  MOVIE_PRODUCTION_COMPANIES
+  MOVIE_PRODUCTION_COMPANIES,
+  MOVIES
 } from "../src/table-names";
 import { Database } from "../src/database";
 import { tableInfo } from "../src/queries/table-info";
@@ -15,7 +16,8 @@ const CREATE_MOVIE_GENRES_TABLE = `
   (
     movie_id integer NOT NULL,
     genre_id integer NOT NULL,
-    CONSTRAINT PK_Genres PRIMARY KEY (movie_id, genre_id)
+    PRIMARY KEY (movie_id, genre_id),
+    FOREIGN KEY (movie_id) REFERENCES ${MOVIES}(id)
   )
 `;
 
@@ -24,7 +26,8 @@ const CREATE_MOVIE_ACTORS_TABLE = `
   (
     movie_id integer NOT NULL,
     actor_id integer NOT NULL,
-    CONSTRAINT PK_Actors PRIMARY KEY (movie_id, actor_id)
+    PRIMARY KEY (movie_id, actor_id),
+    FOREIGN KEY (actor_id) REFERENCES ${MOVIES}(id)
   )
 `;
 
@@ -33,7 +36,8 @@ const CREATE_MOVIE_DIRECTORS_TABLE = `
   (
     movie_id integer NOT NULL,
     director_id integer NOT NULL,
-    CONSTRAINT PK_Directors PRIMARY KEY (movie_id, director_id)
+    PRIMARY KEY (movie_id, director_id),
+    FOREIGN KEY (director_id) REFERENCES ${MOVIES}(id)
   )
 `;
 
@@ -42,7 +46,8 @@ const CREATE_MOVIE_KEYWORDS_TABLE = `
   (
     movie_id integer NOT NULL,
     keyword_id integer NOT NULL,
-    CONSTRAINT PK_Keywords PRIMARY KEY (movie_id, keyword_id)
+    PRIMARY KEY (movie_id, keyword_id),
+    FOREIGN KEY (keyword_id) REFERENCES ${MOVIES}(id)
   )
 `;
 
@@ -51,7 +56,8 @@ const CREATE_MOVIE_PRODUCTION_COMPANIES_TABLE = `
   (
     movie_id integer NOT NULL,
     company_id integer NOT NULL,
-    CONSTRAINT PK_Companies PRIMARY KEY (movie_id, company_id)
+    PRIMARY KEY (movie_id, company_id),
+    FOREIGN KEY (company_id) REFERENCES ${MOVIES}(id)
   )
 `;
 
