@@ -41,7 +41,7 @@ const CREATE_APPS_CATEGORIES_TABLE = `
     (
         app_id integer NOT NULL,
         category_id integer NOT NULL,
-        PRIMARY KEY (app_id)
+        CONSTRAINT PK_AppsCategories PRIMARY KEY (app_id, category_id)
     )`;
 
 const CREATE_KEY_BENEFITS_TABLE = `
@@ -56,7 +56,7 @@ const CREATE_KEY_BENEFITS_TABLE = `
 const CREATE_PRICING_PLANS_TABLE = `
     CREATE TABLE ${PRICING_PLANS}
     (
-        app_id integer NOT NULL,
+        id integer NOT NULL,
         price text NOT NULL,
         PRIMARY KEY (app_id)
     )`;
@@ -65,7 +65,7 @@ const CREATE_APPS_PRICING_PLANS_TABLE = `
     CREATE TABLE ${APPS_PRICING_PLANS}
     (
         app_id integer NOT NULL,
-        pricing_plan_id integer NOT NULL,
+        pricing_plans_id integer NOT NULL,
         PRIMARY KEY (app_id)
     )`;
 
