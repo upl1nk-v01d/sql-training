@@ -1,57 +1,57 @@
 export const selectActorByName = (fullName: string): string => {
-  throw new Error(`todo`);
+  return `SELECT full_name FROM actors WHERE full_name LIKE '${fullName}'`
 };
 
 export const selectKeyword = (keyword: string): string => {
-  throw new Error(`todo`);
+  return `SELECT keyword FROM keywords WHERE keyword LIKE '${keyword}'`
 };
 
 export const selectDirector = (director: string): string => {
-  throw new Error(`todo`);
+  return `SELECT full_name FROM directors WHERE full_name LIKE '${director}'`
 };
 
 export const selectGenre = (genre: string): string => {
-  throw new Error(`todo`);
+  return `SELECT genre FROM genres WHERE genre LIKE '${genre}'`
 };
 
 export const selectProductionCompany = (company: string): string => {
-  throw new Error(`todo`);
+  return `SELECT company_name FROM production_companies WHERE company_name LIKE '${company}'`
 };
 
 export const selectMovieById = (id: number): string => {
-  throw new Error(`todo`);
+  return `SELECT imdb_id FROM movies WHERE imdb_id = '${id}'`;
 };
 
 export const selectGenreById = (id: number): string => {
-  throw new Error(`todo`);
+  return `SELECT genre_id FROM movie_genres WHERE genre_id = '${id}'`;
 };
 
 export const selectDirectorById = (id: number): string => {
-  throw new Error(`todo`);
+  return `SELECT director_id FROM movie_directors WHERE director_id = '${id}'`;
 };
 
 export const selectActorById = (id: number): string => {
-  throw new Error(`todo`);
+  return `SELECT actor_id FROM movie_actors WHERE actor_id = '${id}'`;
 };
 
 export const selectKeywordById = (id: number): string => {
-  throw new Error(`todo`);
+  return `SELECT keyword_id FROM movie_keywords WHERE keyword_id = '${id}'`;
 };
 
 export const selectProductionCompanyById = (id: number): string => {
-  throw new Error(`todo`);
+  return `SELECT production_id FROM movie_production_companies WHERE production_id = '${id}'`;
 };
 
 export const selectMovie = (imdbId: string): string => {
-  throw new Error(`todo`);
+  return `SELECT imdb_id, original_title FROM movies WHERE imdb_id LIKE '${imdbId}'`
 };
 
 export const selectMovieId = (imdbId: string): string => {
-  throw new Error(`todo`);
+  return `SELECT id FROM movies WHERE imdb_id = '${imdbId}'`
 };
 
 export const selectRatingsByUserID = (userId: number): string => {
-  throw new Error(`todo`);
+  return `SELECT * FROM movie_ratings WHERE user_id LIKE '${userId}'`
 };
 
 export const selectGenresByMovieId = (movieId: number): string => {
@@ -78,5 +78,5 @@ export const selectProductionCompaniesByMovieId = (movieId: number): string => {
  * select count as c, because an object is returned and expected property name is c
  */
 export const selectCount = (table: string): string => {
-  throw new Error(`todo`);
+  return `SELECT COUNT(*) AS c FROM ${table}`;
 };
