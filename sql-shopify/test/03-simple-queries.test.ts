@@ -1,4 +1,5 @@
 import { Database } from "../src/database";
+import { APPS, REVIEWS } from "../src/shopify-table-names";
 import { minutes } from "./utils";
 
 describe("Simple Queries", () => {
@@ -9,7 +10,12 @@ describe("Simple Queries", () => {
     }, minutes(1));
 
     it("should select app count with rating of 5 stars", async done => {
-        const query = `todo`;
+        const query = `
+            SELECT 
+                COUNT(rating) as count
+            FROM ${APPS}
+            WHERE rating >= 5
+        `;
         const result = await db.selectSingleRow(query);
         expect(result).toEqual({
             count: 731
@@ -18,7 +24,15 @@ describe("Simple Queries", () => {
     }, minutes(1));
 
     it("should select top 3 develepors with most apps published", async done => {
-        const query = `todo`;
+        const query = `
+            SELECT 
+                COUNT(author) as count,
+                author AS developer
+            FROM ${REVIEWS}
+            ORDER BY count
+            DESC
+            LIMIT 3
+        `;
 
         const result = await db.selectMultipleRows(query);
         expect(result).toEqual([
@@ -30,7 +44,16 @@ describe("Simple Queries", () => {
     }, minutes(1));
 
     it("should select count of reviews created in year 2014, 2015 and 2016", async done => {
-        const query = `todo`;
+        const query = `
+            SELECT 
+                STRFTIME('%Y', date_created) AS year, 
+                COUNT(*) as count
+            FROM ${REVIEWS}
+            WHERE 
+                DATE(date_created) >= '2014-01-01' AND 
+                DATE(date_created) < '2017-01-01'
+            GROUP BY year
+        `;
         const result = await db.selectMultipleRows(query);
         expect(result).toEqual([
             { year: "2014", review_count: 6157 },
