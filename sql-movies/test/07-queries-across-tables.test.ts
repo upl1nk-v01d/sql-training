@@ -15,7 +15,7 @@ describe("Queries Across Tables", () => {
       const query = `
         SELECT 
           full_name AS director,   
-          budget AS total_budget
+          budget_adjusted AS total_budget
         FROM ${MOVIES}, ${DIRECTORS}, ${MOVIE_DIRECTORS}
         INNER JOIN ${MOVIE_DIRECTORS} ON ${MOVIES}.imdb_id = ${MOVIE_DIRECTORS}.movie_id
         ORDER BY total_budget

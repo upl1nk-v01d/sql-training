@@ -63,7 +63,7 @@ export class CsvLoader {
     if (movies.length > 0) {
       return movies;
     }
-    return this.loadMovies(DATA_DIR + "/movies.csv");
+    return this.loadMovies(DATA_DIR + "/movies1.csv");
   }
 
   static async loadRatings(filePath: string): Promise<Rating[]> {
@@ -76,7 +76,7 @@ export class CsvLoader {
     if (ratings.length > 0) {
       return ratings;
     }
-    return this.loadRatings(DATA_DIR + "/ratings.csv");
+    return this.loadRatings(DATA_DIR + "/ratings1.csv");
   }
 
   static async actors(): Promise<string[]> {
