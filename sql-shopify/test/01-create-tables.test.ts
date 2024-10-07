@@ -58,15 +58,15 @@ const CREATE_PRICING_PLANS_TABLE = `
     (
         id integer NOT NULL,
         price text NOT NULL,
-        PRIMARY KEY (app_id)
+        PRIMARY KEY (id)
     )`;
 
 const CREATE_APPS_PRICING_PLANS_TABLE = `
     CREATE TABLE ${APPS_PRICING_PLANS}
     (
         app_id integer NOT NULL,
-        pricing_plans_id integer NOT NULL,
-        PRIMARY KEY (app_id)
+        pricing_plan_id integer NOT NULL,
+        PRIMARY KEY (app_id, pricing_plan_id)
     )`;
 
 const CREATE_REVIEWS_TABLE = `
@@ -83,21 +83,21 @@ const CREATE_REVIEWS_TABLE = `
     )`;
 
 const CREATE_INDEX_REVIEWS_AUTHOR = `
-    CREATE INDEX movies_release_date_idx On ${REVIEWS}
+    CREATE INDEX reviews_author_idx ON ${REVIEWS}
     (
-        reviews_author_idx
+        author
     )`;
 
 const CREATE_INDEX_PRICING_PLANS_PRICE = `
-    CREATE INDEX movies_release_date_idx On ${PRICING_PLANS}
+    CREATE INDEX pricing_plans_price_idx ON ${PRICING_PLANS}
     (
-        pricing_plans_price_idx
+        price
     )`;
 
 const CREATE_UNIQUE_INDEX_APPS_ID = `
-    CREATE UNIQUE INDEX movies_release_date_idx On ${APPS}
+    CREATE UNIQUE INDEX apps_id_unq_idx ON ${APPS}
     (
-        apps_id_unq_idx
+        id
     )`;
 
 describe("Create Tables", () => {
@@ -142,7 +142,7 @@ describe("Create Tables", () => {
         const mapFn = (row: any) => {
             return {
                 name: row.name,
-                type: row.type
+                type: row.type.toLowerCase()
             };
         };
 
