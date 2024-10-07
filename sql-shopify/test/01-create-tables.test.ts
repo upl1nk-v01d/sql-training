@@ -33,7 +33,8 @@ const CREATE_CATEGORIES_TABLE = `
     (
         id integer NOT NULL,
         title text NOT NULL,
-        PRIMARY KEY (id)
+        PRIMARY KEY (id),
+        FOREIGN KEY (id) REFERENCES ${APPS}(id)
     )`;
 
 const CREATE_APPS_CATEGORIES_TABLE = `
@@ -41,7 +42,8 @@ const CREATE_APPS_CATEGORIES_TABLE = `
     (
         app_id integer NOT NULL,
         category_id integer NOT NULL,
-        CONSTRAINT PK_AppsCategories PRIMARY KEY (app_id, category_id)
+        PRIMARY KEY (app_id, category_id),
+        FOREIGN KEY (app_id) REFERENCES ${APPS}(id)
     )`;
 
 const CREATE_KEY_BENEFITS_TABLE = `
@@ -50,7 +52,7 @@ const CREATE_KEY_BENEFITS_TABLE = `
         app_id integer NOT NULL,
         title text NOT NULL,
         description text NOT NULL,
-        CONSTRAINT PK_KeyBenefits PRIMARY KEY (app_id, title)
+        PRIMARY KEY (app_id, title)
     )`;
 
 const CREATE_PRICING_PLANS_TABLE = `
@@ -66,7 +68,8 @@ const CREATE_APPS_PRICING_PLANS_TABLE = `
     (
         app_id integer NOT NULL,
         pricing_plan_id integer NOT NULL,
-        PRIMARY KEY (app_id, pricing_plan_id)
+        PRIMARY KEY (app_id, pricing_plan_id),
+        FOREIGN KEY (app_id) REFERENCES ${APPS}(id)
     )`;
 
 const CREATE_REVIEWS_TABLE = `
@@ -79,7 +82,8 @@ const CREATE_REVIEWS_TABLE = `
         helpful_count integer NOT NULL,
         date_created text NOT NULL,
         developer_reply text,
-        developer_reply_date text
+        developer_reply_date text,
+        FOREIGN KEY (app_id) REFERENCES ${APPS}(id)
     )`;
 
 const CREATE_INDEX_REVIEWS_AUTHOR = `
