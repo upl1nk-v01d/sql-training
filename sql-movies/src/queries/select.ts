@@ -1,21 +1,21 @@
 export const selectActorByName = (fullName: string): string => {
-  return `SELECT full_name FROM actors WHERE full_name LIKE '${fullName}'`
+  return `SELECT full_name FROM actors WHERE full_name LIKE '${fullName}'`;
 };
 
 export const selectKeyword = (keyword: string): string => {
-  return `SELECT keyword FROM keywords WHERE keyword LIKE '${keyword}'`
+  return `SELECT keyword FROM keywords WHERE keyword LIKE '${keyword}'`;
 };
 
 export const selectDirector = (director: string): string => {
-  return `SELECT full_name FROM directors WHERE full_name LIKE '${director}'`
+  return `SELECT full_name FROM directors WHERE full_name LIKE '${director}'`;
 };
 
 export const selectGenre = (genre: string): string => {
-  return `SELECT genre FROM genres WHERE genre LIKE '${genre}'`
+  return `SELECT genre FROM genres WHERE genre LIKE '${genre}'`;
 };
 
 export const selectProductionCompany = (company: string): string => {
-  return `SELECT company_name FROM production_companies WHERE company_name LIKE '${company}'`
+  return `SELECT company_name FROM production_companies WHERE company_name LIKE '${company}'`;
 };
 
 export const selectMovieById = (id: number): string => {
@@ -43,15 +43,15 @@ export const selectProductionCompanyById = (id: number): string => {
 };
 
 export const selectMovie = (imdbId: string): string => {
-  return `SELECT imdb_id, original_title FROM movies WHERE imdb_id LIKE '${imdbId}'`
+  return `SELECT * FROM movies WHERE imdb_id = '${imdbId}'`;
 };
 
 export const selectMovieId = (imdbId: string): string => {
-  return `SELECT id FROM movies WHERE imdb_id = '${imdbId}'`
+  return `SELECT id FROM movies WHERE imdb_id = '${imdbId}'`;
 };
 
 export const selectRatingsByUserID = (userId: number): string => {
-  return `SELECT * FROM movie_ratings WHERE user_id LIKE '${userId}'`
+  return `SELECT * FROM movie_ratings WHERE user_id LIKE '${userId}'`;
 };
 
 export const selectGenresByMovieId = (movieId: number): string => {
